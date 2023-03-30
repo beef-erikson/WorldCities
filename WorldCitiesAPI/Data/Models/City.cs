@@ -3,9 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WorldCitiesAPI.Data.Models;
 
+[Table("Cities")]
 public class City
 {
-    #region Properties
+    /***** PROPERTIES *****/
     
     /// <summary>
     /// The unique id and primary key of this city.
@@ -34,7 +35,13 @@ public class City
     /// <summary>
     /// Country Id (foreign key)
     /// </summary>
+    [ForeignKey(nameof(Country))]
     public int CountryId { get; set; }
     
-    #endregion
+    /********* NAVIGATION PROPERTIES *********/
+    
+    /// <summary>
+    /// The country this city belongs to.
+    /// </summary>
+    public Country? Country { get; set; } = null!;
 }
