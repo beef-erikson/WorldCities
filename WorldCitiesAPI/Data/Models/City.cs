@@ -22,7 +22,7 @@ public class City
     /// <summary>
     /// City name (in UTF8 format)
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     
     /// <summary>
     /// City Latitude
