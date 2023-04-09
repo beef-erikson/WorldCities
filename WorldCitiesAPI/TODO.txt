@@ -1,0 +1,7 @@
+MSSQL
+Apache
+Dynamic DNS with namecheap
+Rider
+Unity
+Discord
+Steam
