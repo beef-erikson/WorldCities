@@ -6,3 +6,4 @@ Unity
 Discord
 Steam
 .NET SDK
+DBeaver
