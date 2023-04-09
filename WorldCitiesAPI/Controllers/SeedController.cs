@@ -1,15 +1,13 @@
 using System.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.CompilerServices;
 using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 
 namespace WorldCitiesAPI.Controllers;
 using Data;
 using Data.Models;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class SeedController : ControllerBase
 {
@@ -28,8 +26,10 @@ public class SeedController : ControllerBase
     public async Task<ActionResult> Import()
     {
         if (!_env.IsDevelopment())
+        {
             throw new SecurityException("Not allowed.");
-        
+        }
+
         var path = Path.Combine(
             _env.ContentRootPath,
             "Data/Source/worldcities.xlsx");
@@ -123,8 +123,10 @@ public class SeedController : ControllerBase
                     Lat: lat,
                     Lon: lon,
                     CountryId: countryId)))
+            {
                 continue;
-            
+            }
+
             // Create the City entity and fill it with xlsx data
             var city = new City
             {
@@ -139,6 +141,12 @@ public class SeedController : ControllerBase
             
             // Increment the counter
             numberOfCitiesAdded++;
+        }
+        
+        // Save all the cities to the database
+        if (numberOfCitiesAdded > 0)
+        {
+            await _context.SaveChangesAsync();
         }
 
         return new JsonResult(new
