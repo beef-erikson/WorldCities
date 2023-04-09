@@ -5,3 +5,4 @@ Rider
 Unity
 Discord
 Steam
+.NET SDK
